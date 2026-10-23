@@ -1,0 +1,244 @@
+package edu.cmu.cs214.campusreserve.core.service;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import edu.cmu.cs214.campusreserve.core.domain.Booking;
+import edu.cmu.cs214.campusreserve.core.domain.BookingStatus;
+import edu.cmu.cs214.campusreserve.core.domain.CancellationResult;
+import edu.cmu.cs214.campusreserve.core.domain.ModificationResult;
+import edu.cmu.cs214.campusreserve.core.domain.RejectionReason;
+import edu.cmu.cs214.campusreserve.core.domain.TimeInterval;
+import edu.cmu.cs214.campusreserve.core.domain.WaitlistEntry;
+import edu.cmu.cs214.campusreserve.core.policy.BookingPolicy;
+import edu.cmu.cs214.campusreserve.core.policy.ConflictChecker;
+import edu.cmu.cs214.campusreserve.core.support.Fixtures;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+import org.junit.jupiter.api.Test;
+
+class RefuterProbeModifyTest extends BookingServiceTestBase {
+
+    // --- exclusion of self ---------------------------------------------------
+
+    @Test
+    void nudgeEarlierByOneSlotIsAllowed() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        assertTrue(service.modifyBooking(id, "u-1", Fixtures.interval("09:45", "10:45"), 4).isModified());
+    }
+
+    @Test
+    void shrinkInsideOwnOldTimeIsAllowed() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        assertTrue(service.modifyBooking(id, "u-1", Fixtures.interval("10:15", "10:45"), 4).isModified());
+    }
+
+    @Test
+    void ownOtherBookingInSameRoomStillBlocks() {
+        String a = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        String b = bookAndGetId("r-1", "u-1", Fixtures.interval("11:00", "12:00"));
+        Booking beforeA = service.findBooking(a).orElseThrow();
+        Booking beforeB = service.findBooking(b).orElseThrow();
+        ModificationResult r = service.modifyBooking(a, "u-1", Fixtures.interval("10:30", "11:30"), 4);
+        assertFalse(r.succeeded(), "should be rejected, got " + r);
+        assertEquals(beforeA, service.findBooking(a).orElseThrow());
+        assertEquals(beforeB, service.findBooking(b).orElseThrow());
+    }
+
+    @Test
+    void capNotConsultedEvenWhenUserIsOverTheCap() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        bookAndGetId("r-1", "u-1", Fixtures.interval("12:00", "13:00"));
+        build(BookingPolicy.defaults().withMaxActiveBookingsPerUser(1));
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("14:00", "15:00"), 4);
+        assertTrue(r.isModified(), "got " + r);
+    }
+
+    // --- rejected changes nothing ---------------------------------------------
+
+    @Test
+    void rejectedModificationDoesNotRunThePass() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        bookAndGetId("r-1", "u-2", Fixtures.interval("14:00", "15:00"));
+        WaitlistEntry stranded = stranded("u-3", Fixtures.interval("16:00", "17:00"));
+        int before = bookings.count();
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("14:30", "15:30"), 4);
+        assertFalse(r.succeeded());
+        assertEquals(before, bookings.count());
+        assertTrue(waitlist.findById(stranded.id()).isPresent());
+        assertEquals(List.of("booking-created", "booking-created"), publisher.types());
+    }
+
+    @Test
+    void zeroAttendeesIsRejectedNotThrown() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        Booking before = service.findBooking(id).orElseThrow();
+        ModificationResult r = assertDoesNotThrow(
+            () -> service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:00"), 0));
+        assertFalse(r.succeeded());
+        assertEquals(before, service.findBooking(id).orElseThrow());
+    }
+
+    // --- no-op ---------------------------------------------------------------
+
+    @Test
+    void noOpWithEqualButDistinctIntervalInstanceIsUnchanged() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        TimeInterval same = TimeInterval.ofMinutes(Instant.parse("2026-10-20T10:00:00Z"), 60);
+        ModificationResult r = service.modifyBooking(id, "u-1", same, 4);
+        assertTrue(r.succeeded());
+        assertFalse(r.isModified());
+        assertTrue(service.findBooking(id).orElseThrow().modifications().isEmpty());
+    }
+
+    @Test
+    void noOpOnInactiveRoomObserved() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        rooms.save(rooms.findById("r-1").orElseThrow().withActive(false));
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:00"), 4);
+        System.out.println("PROBE noOpOnInactiveRoom -> " + r);
+    }
+
+    @Test
+    void noOpOnStartedBookingObserved() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        clock.setTo("2026-10-20T10:00:00Z");
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:00"), 4);
+        System.out.println("PROBE noOpOnStarted -> " + r);
+    }
+
+    // --- precedence ------------------------------------------------------------
+
+    @Test
+    void precedenceObserved() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        bookAndGetId("r-1", "u-2", Fixtures.interval("14:00", "15:00"));
+        bookAndGetId("r-2", "u-1", Fixtures.interval("14:00", "15:00"));
+        System.out.println("PROBE nonOwner+taken -> "
+            + service.modifyBooking(id, "u-2", Fixtures.interval("14:00", "15:00"), 4));
+        System.out.println("PROBE own+room -> "
+            + service.modifyBooking(id, "u-1", Fixtures.interval("14:00", "15:00"), 4));
+        System.out.println("PROBE tooLong+taken -> "
+            + service.modifyBooking(id, "u-1", Fixtures.interval("12:00", "15:15"), 4));
+        System.out.println("PROBE capacity+taken -> "
+            + service.modifyBooking(id, "u-1", Fixtures.interval("14:00", "15:00"), 99));
+    }
+
+    // --- upcoming boundary -----------------------------------------------------
+
+    @Test
+    void oneSecondBeforeStartIsStillUpcoming() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        clock.setTo("2026-10-20T09:59:59Z");
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:00"), 6);
+        assertTrue(r.isModified(), "got " + r);
+    }
+
+    @Test
+    void endedBookingCannotBeModified() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        clock.setTo("2026-10-20T12:00:00Z");
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("14:00", "15:00"), 4);
+        assertEquals(Optional.of(RejectionReason.BOOKING_ALREADY_STARTED), r.rejectionReason());
+    }
+
+    // --- promotion -------------------------------------------------------------
+
+    @Test
+    void nudgeFreesHeadAndPromotesOnlyWhatFits() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        assertTrue(book("r-1", "u-2", Fixtures.interval("10:00", "11:00")).isWaitlisted());
+        assertTrue(book("r-1", "u-3", Fixtures.interval("10:00", "10:30")).isWaitlisted());
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("10:30", "11:30"), 4);
+        assertEquals(List.of("u-3"), r.promotions().stream().map(p -> p.booking().userId()).toList());
+        assertFalse(new ConflictChecker().containsMutualConflict(bookings.findAll()));
+    }
+
+    @Test
+    void promotionRespectsWaitersCapAfterModify() {
+        build(BookingPolicy.defaults().withMaxActiveBookingsPerUser(1));
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "12:00"));
+        assertTrue(book("r-1", "u-2", Fixtures.interval("11:00", "12:00")).isWaitlisted());
+        bookAndGetId("r-2", "u-2", Fixtures.interval("14:00", "15:00"));
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:00"), 4);
+        assertTrue(r.promotions().isEmpty());
+        assertEquals(1, service.activeBookingsForUser("u-2").size());
+    }
+
+    @Test
+    void attendeeOnlyChangeDropsNoStaleEntries() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        WaitlistEntry stale = stranded("u-2", Fixtures.intervalOn("2026-10-19", "06:00", "07:00"));
+        service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:00"), 7);
+        assertTrue(waitlist.findById(stale.id()).isPresent());
+    }
+
+    /**
+     * A waiter left behind by an earlier pass, built only through the public API.
+     * The CR says a lengthen "frees nothing" and "running the pass and promoting
+     * nobody is the right outcome there".
+     */
+    @Test
+    void lengthenPromotesAStrandedWaiterReachedThroughThePublicApi() {
+        String other = bookAndGetId("r-1", "u-3", Fixtures.interval("14:00", "15:00"));
+        assertTrue(book("r-1", "u-2", Fixtures.interval("14:00", "15:00")).isWaitlisted());
+        String r2 = bookAndGetId("r-2", "u-2", Fixtures.interval("14:00", "15:00"));
+        CancellationResult c = service.cancelBooking(other, "u-3");
+        assertTrue(c.promotions().isEmpty());
+        service.cancelBooking(r2, "u-2");
+        assertEquals(1, service.waitlistForUser("u-2").size());
+
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:30"), 4);
+        assertTrue(r.promotions().isEmpty(), "lengthen promoted " + r.promotions());
+    }
+
+    // --- history and record ------------------------------------------------------
+
+    @Test
+    void modifiedKeepsStatusCreatedAtRoomAndUser() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        Booking before = service.findBooking(id).orElseThrow();
+        clock.setTo("2026-10-19T09:30:00Z");
+        service.modifyBooking(id, "u-1", Fixtures.interval("12:00", "13:00"), 5);
+        Booking after = service.findBooking(id).orElseThrow();
+        assertEquals(before.createdAt(), after.createdAt());
+        assertEquals(BookingStatus.CONFIRMED, after.status());
+        assertEquals(before.roomId(), after.roomId());
+        assertEquals(before.userId(), after.userId());
+        assertEquals(1, after.modifications().size());
+        assertEquals(Instant.parse("2026-10-19T09:30:00Z"), after.modifications().get(0).modifiedAt());
+        assertEquals(before.interval(), after.modifications().get(0).previousInterval());
+        assertEquals(service.bookingsForUser("u-1").get(0).modifications(), after.modifications());
+    }
+
+    @Test
+    void sevenArgConstructorEqualsConfirmed() {
+        TimeInterval i = Fixtures.interval("10:00", "11:00");
+        Instant t = Instant.parse(Fixtures.NOW);
+        assertEquals(Booking.confirmed("bk-1", "r-1", "u-1", i, 4, t),
+            new Booking("bk-1", "r-1", "u-1", i, 4, BookingStatus.CONFIRMED, t));
+    }
+
+    @Test
+    void publisherFailureDuringPromotionKeepsTheModification() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        assertTrue(book("r-1", "u-2", Fixtures.interval("10:00", "11:00")).isWaitlisted());
+        publisher.failWith(new RuntimeException("down"));
+        ModificationResult r = service.modifyBooking(id, "u-1", Fixtures.interval("14:00", "15:00"), 4);
+        assertTrue(r.isModified());
+        assertEquals(Fixtures.interval("14:00", "15:00"), service.findBooking(id).orElseThrow().interval());
+        assertEquals(1, r.promotions().size());
+    }
+
+    private WaitlistEntry stranded(String userId, TimeInterval interval) {
+        WaitlistEntry entry = new WaitlistEntry(
+            "wl-probe-" + userId, "r-1", userId, interval, 4, waitlist.nextSequence(),
+            Instant.parse(Fixtures.NOW));
+        waitlist.save(entry);
+        return entry;
+    }
+}

@@ -1,0 +1,450 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] CampusReserve                                                      [pom]
+[INFO] CampusReserve core domain                                          [jar]
+[INFO] CampusReserve storage                                              [jar]
+[INFO] CampusReserve notifications                                        [jar]
+[INFO] CampusReserve accounts                                             [jar]
+[INFO] CampusReserve billing                                              [jar]
+[INFO] CampusReserve HTTP API                                             [jar]
+[INFO] CampusReserve CLI                                                  [jar]
+[INFO] 
+[INFO] ----------< edu.cmu.cs214.campusreserve:campusreserve-parent >----------
+[INFO] Building CampusReserve 1.0.0                                       [1/8]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ campusreserve-parent ---
+[INFO] 
+[INFO] --------------< edu.cmu.cs214.campusreserve:core-domain >---------------
+[INFO] Building CampusReserve core domain 1.0.0                           [2/8]
+[INFO]   from core-domain/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ core-domain ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ core-domain ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ core-domain ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 32 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ core-domain ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ core-domain ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 16 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ core-domain ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceWaitlistTest
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceWaitlistTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceCancelTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceCancelTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.AvailabilityServiceTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in edu.cmu.cs214.campusreserve.core.service.AvailabilityServiceTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.CatalogAndRegistryTest
+[INFO] Running user registry
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in user registry
+[INFO] Running room catalog
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in room catalog
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in edu.cmu.cs214.campusreserve.core.service.CatalogAndRegistryTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceCreateTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceCreateTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceModifyTest
+[INFO] Tests run: 35, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceModifyTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.domain.EntityTest
+[INFO] Running outcomes
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in outcomes
+[INFO] Running waitlist entry
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in waitlist entry
+[INFO] Running booking
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in booking
+[INFO] Running user
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in user
+[INFO] Running room kind
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in room kind
+[INFO] Running room
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in room
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in edu.cmu.cs214.campusreserve.core.domain.EntityTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.domain.TimeIntervalTest
+[INFO] Running ordering
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in ordering
+[INFO] Running calendar arithmetic
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in calendar arithmetic
+[INFO] Running membership
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in membership
+[INFO] Running overlaps
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in overlaps
+[INFO] Running construction
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in construction
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in edu.cmu.cs214.campusreserve.core.domain.TimeIntervalTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.policy.BookingRulesTest
+[INFO] Running promotability
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in promotability
+[INFO] Running cancellation
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in cancellation
+[INFO] Running room state and party size
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in room state and party size
+[INFO] Running calendar window
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in calendar window
+[INFO] Running interval shape
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in interval shape
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in edu.cmu.cs214.campusreserve.core.policy.BookingRulesTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.policy.BookingPolicyTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in edu.cmu.cs214.campusreserve.core.policy.BookingPolicyTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.policy.ConflictCheckerTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in edu.cmu.cs214.campusreserve.core.policy.ConflictCheckerTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 202, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] ----------------< edu.cmu.cs214.campusreserve:storage >-----------------
+[INFO] Building CampusReserve storage 1.0.0                               [3/8]
+[INFO]   from storage/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ storage ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/storage/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ storage ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/storage/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ storage ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 12 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ storage ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/storage/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ storage ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ storage ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.storage.BookingFlowStorageTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 s -- in edu.cmu.cs214.campusreserve.storage.BookingFlowStorageTest
+[INFO] Running edu.cmu.cs214.campusreserve.storage.InMemoryStoreTest
+[INFO] Running waitlist store
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in waitlist store
+[INFO] Running booking store
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in booking store
+[INFO] Running user store
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in user store
+[INFO] Running room store
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in room store
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.044 s -- in edu.cmu.cs214.campusreserve.storage.InMemoryStoreTest
+[INFO] Running edu.cmu.cs214.campusreserve.storage.EventLogTest
+[INFO] Running jsonl file writer
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in jsonl file writer
+[INFO] Running in-memory event log
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in in-memory event log
+[INFO] Running event log format
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in event log format
+[INFO] Running json line
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in json line
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s -- in edu.cmu.cs214.campusreserve.storage.EventLogTest
+[INFO] Running edu.cmu.cs214.campusreserve.storage.StoreRegistryTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in edu.cmu.cs214.campusreserve.storage.StoreRegistryTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 63, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] -------------< edu.cmu.cs214.campusreserve:notifications >--------------
+[INFO] Building CampusReserve notifications 1.0.0                         [4/8]
+[INFO]   from notifications/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ notifications ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/notifications/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ notifications ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/notifications/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ notifications ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 26 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ notifications ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/notifications/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ notifications ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ notifications ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.ValueTypesTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in edu.cmu.cs214.campusreserve.notifications.ValueTypesTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.InMemoryOutboxTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in edu.cmu.cs214.campusreserve.notifications.InMemoryOutboxTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.delivery.DeliveryTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.delivery.DeliveryTest$Dispatch
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in edu.cmu.cs214.campusreserve.notifications.delivery.DeliveryTest$Dispatch
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.delivery.DeliveryTest$Policy
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in edu.cmu.cs214.campusreserve.notifications.delivery.DeliveryTest$Policy
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in edu.cmu.cs214.campusreserve.notifications.delivery.DeliveryTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest$Registry
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest$Registry
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest$Shipped
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest$Shipped
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest$Engine
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest$Engine
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in edu.cmu.cs214.campusreserve.notifications.templates.TemplateTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest$Pipeline
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest$Pipeline
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest$Failures
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest$Failures
+[INFO] Running edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest$Writing
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest$Writing
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in edu.cmu.cs214.campusreserve.notifications.NotificationServiceTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 41, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] ----------------< edu.cmu.cs214.campusreserve:accounts >----------------
+[INFO] Building CampusReserve accounts 1.0.0                              [5/8]
+[INFO]   from accounts/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ accounts ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/accounts/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ accounts ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/accounts/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ accounts ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 13 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ accounts ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/accounts/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ accounts ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ accounts ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ServicesTest
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ServicesTest$Access
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in edu.cmu.cs214.campusreserve.accounts.ServicesTest$Access
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ServicesTest$Sessions
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in edu.cmu.cs214.campusreserve.accounts.ServicesTest$Sessions
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ServicesTest$Directory
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in edu.cmu.cs214.campusreserve.accounts.ServicesTest$Directory
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in edu.cmu.cs214.campusreserve.accounts.ServicesTest
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ValueTypesTest
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ValueTypesTest$Rules
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in edu.cmu.cs214.campusreserve.accounts.ValueTypesTest$Rules
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ValueTypesTest$Tokens
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in edu.cmu.cs214.campusreserve.accounts.ValueTypesTest$Tokens
+[INFO] Running edu.cmu.cs214.campusreserve.accounts.ValueTypesTest$Accounts
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in edu.cmu.cs214.campusreserve.accounts.ValueTypesTest$Accounts
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in edu.cmu.cs214.campusreserve.accounts.ValueTypesTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] ----------------< edu.cmu.cs214.campusreserve:billing >-----------------
+[INFO] Building CampusReserve billing 1.0.0                               [6/8]
+[INFO]   from billing/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ billing ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/billing/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ billing ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/billing/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ billing ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 18 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ billing ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/billing/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ billing ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ billing ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.billing.InvoiceServiceTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.061 s -- in edu.cmu.cs214.campusreserve.billing.InvoiceServiceTest
+[INFO] Running edu.cmu.cs214.campusreserve.billing.PricingTest
+[INFO] Running edu.cmu.cs214.campusreserve.billing.PricingTest$Pipeline
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in edu.cmu.cs214.campusreserve.billing.PricingTest$Pipeline
+[INFO] Running edu.cmu.cs214.campusreserve.billing.PricingTest$Rules
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in edu.cmu.cs214.campusreserve.billing.PricingTest$Rules
+[INFO] Running edu.cmu.cs214.campusreserve.billing.PricingTest$Cards
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in edu.cmu.cs214.campusreserve.billing.PricingTest$Cards
+[INFO] Running edu.cmu.cs214.campusreserve.billing.PricingTest$Amounts
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in edu.cmu.cs214.campusreserve.billing.PricingTest$Amounts
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in edu.cmu.cs214.campusreserve.billing.PricingTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] ----------------< edu.cmu.cs214.campusreserve:http-api >----------------
+[INFO] Building CampusReserve HTTP API 1.0.0                              [7/8]
+[INFO]   from http-api/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ http-api ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/http-api/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ http-api ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/http-api/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ http-api ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 19 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ http-api ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/http-api/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ http-api ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ http-api ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.http.EndpointTest
+[INFO] Running notifications
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.295 s -- in notifications
+[INFO] Running cancellation and the waitlist
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.070 s -- in cancellation and the waitlist
+[INFO] Running bookings
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in bookings
+[INFO] Running rooms
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s -- in rooms
+[INFO] Running health and routing
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in health and routing
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.521 s -- in edu.cmu.cs214.campusreserve.http.EndpointTest
+[INFO] Running edu.cmu.cs214.campusreserve.http.RequestPlumbingTest
+[INFO] Running error mapping
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in error mapping
+[INFO] Running router
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in router
+[INFO] Running request context
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in request context
+[INFO] Running form and query values
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in form and query values
+[INFO] Running json writing
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in json writing
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in edu.cmu.cs214.campusreserve.http.RequestPlumbingTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 78, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] ------------------< edu.cmu.cs214.campusreserve:cli >-------------------
+[INFO] Building CampusReserve CLI 1.0.0                                   [8/8]
+[INFO]   from cli/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ cli ---
+[INFO] Deleting /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/cli/target
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ cli ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/cli/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ cli ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 15 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ cli ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/cli/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ cli ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ cli ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.cli.ArgumentsTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in edu.cmu.cs214.campusreserve.cli.ArgumentsTest
+[INFO] Running edu.cmu.cs214.campusreserve.cli.ExportEventsCommandTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.052 s -- in edu.cmu.cs214.campusreserve.cli.ExportEventsCommandTest
+[INFO] Running edu.cmu.cs214.campusreserve.cli.CommandsTest
+[INFO] Running edu.cmu.cs214.campusreserve.cli.CommandsTest$Listings
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in edu.cmu.cs214.campusreserve.cli.CommandsTest$Listings
+[INFO] Running edu.cmu.cs214.campusreserve.cli.CommandsTest$Dispatch
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in edu.cmu.cs214.campusreserve.cli.CommandsTest$Dispatch
+[INFO] Running edu.cmu.cs214.campusreserve.cli.CommandsTest$Billing
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in edu.cmu.cs214.campusreserve.cli.CommandsTest$Billing
+[INFO] Running edu.cmu.cs214.campusreserve.cli.CommandsTest$Bookings
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in edu.cmu.cs214.campusreserve.cli.CommandsTest$Bookings
+[INFO] Running edu.cmu.cs214.campusreserve.cli.CommandsTest$Catalog
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in edu.cmu.cs214.campusreserve.cli.CommandsTest$Catalog
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s -- in edu.cmu.cs214.campusreserve.cli.CommandsTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for CampusReserve 1.0.0:
+[INFO] 
+[INFO] CampusReserve ...................................... SUCCESS [  0.098 s]
+[INFO] CampusReserve core domain .......................... SUCCESS [  1.824 s]
+[INFO] CampusReserve storage .............................. SUCCESS [  0.702 s]
+[INFO] CampusReserve notifications ........................ SUCCESS [  0.629 s]
+[INFO] CampusReserve accounts ............................. SUCCESS [  0.553 s]
+[INFO] CampusReserve billing .............................. SUCCESS [  0.537 s]
+[INFO] CampusReserve HTTP API ............................. SUCCESS [  1.338 s]
+[INFO] CampusReserve CLI .................................. SUCCESS [  0.634 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.379 s
+[INFO] Finished at: 2026-10-23T11:18:50-04:00
+[INFO] ------------------------------------------------------------------------

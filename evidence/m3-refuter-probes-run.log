@@ -1,0 +1,108 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] CampusReserve                                                      [pom]
+[INFO] CampusReserve core domain                                          [jar]
+[INFO] 
+[INFO] ----------< edu.cmu.cs214.campusreserve:campusreserve-parent >----------
+[INFO] Building CampusReserve 1.0.0                                       [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --------------< edu.cmu.cs214.campusreserve:core-domain >---------------
+[INFO] Building CampusReserve core domain 1.0.0                           [2/2]
+[INFO]   from core-domain/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ core-domain ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ core-domain ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ core-domain ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ core-domain ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ core-domain ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest
+PROBE noOpOnStarted -> Rejected[reason=BOOKING_ALREADY_STARTED, detail=That booking has already started.]
+PROBE noOpOnInactiveRoom -> Unchanged[booking=Booking[id=bk-1, roomId=r-1, userId=u-1, interval=[2026-10-20T10:00:00Z, 2026-10-20T11:00:00Z), attendees=4, status=CONFIRMED, createdAt=2026-10-19T09:00:00Z, modifications=[]]]
+PROBE nonOwner+taken -> Rejected[reason=NOT_BOOKING_OWNER, detail=That booking belongs to someone else.]
+PROBE own+room -> Rejected[reason=USER_DOUBLE_BOOKED, detail=You already hold a booking over that time.]
+PROBE tooLong+taken -> Rejected[reason=INTERVAL_TOO_LONG, detail=The booking is longer than this room allows.]
+PROBE capacity+taken -> Rejected[reason=ATTENDEES_EXCEED_CAPACITY, detail=The room cannot seat that many people.]
+[ERROR] Tests run: 19, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.102 s <<< FAILURE! -- in edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest
+[ERROR] edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest.zeroAttendeesIsRejectedNotThrown -- Time elapsed: 0.006 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception thrown: java.lang.IllegalArgumentException: Attendees must be positive: 0
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertDoesNotThrow.createAssertionFailedError(AssertDoesNotThrow.java:84)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:75)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:58)
+	at org.junit.jupiter.api.Assertions.assertDoesNotThrow(Assertions.java:3228)
+	at edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest.zeroAttendeesIsRejectedNotThrown(RefuterProbeModifyTest.java:79)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: java.lang.IllegalArgumentException: Attendees must be positive: 0
+	at edu.cmu.cs214.campusreserve.core.domain.BookingRequest.<init>(BookingRequest.java:13)
+	at edu.cmu.cs214.campusreserve.core.domain.BookingRequest.of(BookingRequest.java:19)
+	at edu.cmu.cs214.campusreserve.core.service.BookingService.modifyBooking(BookingService.java:199)
+	at edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest.lambda$zeroAttendeesIsRejectedNotThrown$0(RefuterProbeModifyTest.java:80)
+	at org.junit.jupiter.api.AssertDoesNotThrow.assertDoesNotThrow(AssertDoesNotThrow.java:71)
+	... 6 more
+
+[ERROR] edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest.lengthenPromotesAStrandedWaiterReachedThroughThePublicApi -- Time elapsed: 0.005 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: lengthen promoted [Promotion[entry=WaitlistEntry[id=wl-2, roomId=r-1, userId=u-2, interval=[2026-10-20T14:00:00Z, 2026-10-20T15:00:00Z), attendees=4, sequence=1, requestedAt=2026-10-19T09:00:00Z], booking=Booking[id=bk-5, roomId=r-1, userId=u-2, interval=[2026-10-20T14:00:00Z, 2026-10-20T15:00:00Z), attendees=4, status=CONFIRMED, createdAt=2026-10-19T09:00:00Z, modifications=[]]]] ==> expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at edu.cmu.cs214.campusreserve.core.service.RefuterProbeModifyTest.lengthenPromotesAStrandedWaiterReachedThroughThePublicApi(RefuterProbeModifyTest.java:196)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   RefuterProbeModifyTest.lengthenPromotesAStrandedWaiterReachedThroughThePublicApi:196 lengthen promoted [Promotion[entry=WaitlistEntry[id=wl-2, roomId=r-1, userId=u-2, interval=[2026-10-20T14:00:00Z, 2026-10-20T15:00:00Z), attendees=4, sequence=1, requestedAt=2026-10-19T09:00:00Z], booking=Booking[id=bk-5, roomId=r-1, userId=u-2, interval=[2026-10-20T14:00:00Z, 2026-10-20T15:00:00Z), attendees=4, status=CONFIRMED, createdAt=2026-10-19T09:00:00Z, modifications=[]]]] ==> expected: <true> but was: <false>
+[ERROR]   RefuterProbeModifyTest.zeroAttendeesIsRejectedNotThrown:79 Unexpected exception thrown: java.lang.IllegalArgumentException: Attendees must be positive: 0
+[INFO] 
+[ERROR] Tests run: 19, Failures: 2, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for CampusReserve 1.0.0:
+[INFO] 
+[INFO] CampusReserve ...................................... SUCCESS [  0.001 s]
+[INFO] CampusReserve core domain .......................... FAILURE [  0.860 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  0.932 s
+[INFO] Finished at: 2026-10-23T11:25:35-04:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project core-domain: There are test failures.
+[ERROR] 
+[ERROR] See /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :core-domain

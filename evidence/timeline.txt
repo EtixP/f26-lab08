@@ -1,0 +1,7 @@
+# Timeline (local time, written by the agent as each step happened)
+2026-10-23 11:13:00 EDT  baseline: mvn -B test 418 Java tests green; pytest 137 passed (before any edit)
+2026-10-23 11:13:49 EDT  Milestone 1 written in PLAN.md (snapshot: evidence/PLAN-after-milestone1.md); no source edited yet
+2026-10-23 11:14:19 EDT  Milestone 2: recipe C locked billing, cli, accounts; Edit tool + 3 shell writes all refused (EACCES / Permission denied); files unchanged
+2026-10-23 11:15:08 EDT  Milestone 3 takeover point written (snapshot: evidence/PLAN-before-task-run.md); starting T1 run now
+2026-10-23 11:18:50 EDT  T1 gate green (core-domain 202 = 167+35); closing mvn -B clean test done
+2026-10-23 11:26:35 EDT  refuter (fresh subagent) reported 2 findings; finding 1 dismissed with evidence (evidence/m3-finding1-settle.log); probe files deleted; guardrail unlocked; final mvn -B clean test + pytest green

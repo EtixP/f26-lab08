@@ -9,4 +9,7 @@
 # this repository. lockdown.sh locks each entry's src/ directory and its
 # pom.xml, and leaves target/ writable so every gate still runs while locked.
 
-MODULE-YOU-ARE-NOT-TOUCHING
+# Out of scope per PLAN.md Milestone 1 (CHANGE-REQUEST.md "What is explicitly out of scope").
+billing
+cli
+accounts

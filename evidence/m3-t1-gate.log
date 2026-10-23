@@ -1,0 +1,111 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] CampusReserve                                                      [pom]
+[INFO] CampusReserve core domain                                          [jar]
+[INFO] 
+[INFO] ----------< edu.cmu.cs214.campusreserve:campusreserve-parent >----------
+[INFO] Building CampusReserve 1.0.0                                       [1/2]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --------------< edu.cmu.cs214.campusreserve:core-domain >---------------
+[INFO] Building CampusReserve core domain 1.0.0                           [2/2]
+[INFO]   from core-domain/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ core-domain ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ core-domain ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 32 source files with javac [debug release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ core-domain ---
+[INFO] skip non existing resourceDirectory /Users/jsp2022310/Desktop/school/CMU/Junior/Fall/17214/f26-lab08/core-domain/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ core-domain ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 16 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ core-domain ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceWaitlistTest
+[INFO] Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceWaitlistTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceCancelTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceCancelTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.AvailabilityServiceTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in edu.cmu.cs214.campusreserve.core.service.AvailabilityServiceTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.CatalogAndRegistryTest
+[INFO] Running user registry
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in user registry
+[INFO] Running room catalog
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in room catalog
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in edu.cmu.cs214.campusreserve.core.service.CatalogAndRegistryTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceCreateTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceCreateTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.service.BookingServiceModifyTest
+[INFO] Tests run: 35, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in edu.cmu.cs214.campusreserve.core.service.BookingServiceModifyTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.domain.EntityTest
+[INFO] Running outcomes
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in outcomes
+[INFO] Running waitlist entry
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in waitlist entry
+[INFO] Running booking
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in booking
+[INFO] Running user
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in user
+[INFO] Running room kind
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in room kind
+[INFO] Running room
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in room
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in edu.cmu.cs214.campusreserve.core.domain.EntityTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.domain.TimeIntervalTest
+[INFO] Running ordering
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in ordering
+[INFO] Running calendar arithmetic
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in calendar arithmetic
+[INFO] Running membership
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in membership
+[INFO] Running overlaps
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in overlaps
+[INFO] Running construction
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in construction
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in edu.cmu.cs214.campusreserve.core.domain.TimeIntervalTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.policy.BookingRulesTest
+[INFO] Running promotability
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in promotability
+[INFO] Running cancellation
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in cancellation
+[INFO] Running room state and party size
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in room state and party size
+[INFO] Running calendar window
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in calendar window
+[INFO] Running interval shape
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in interval shape
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in edu.cmu.cs214.campusreserve.core.policy.BookingRulesTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.policy.BookingPolicyTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in edu.cmu.cs214.campusreserve.core.policy.BookingPolicyTest
+[INFO] Running edu.cmu.cs214.campusreserve.core.policy.ConflictCheckerTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in edu.cmu.cs214.campusreserve.core.policy.ConflictCheckerTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 202, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for CampusReserve 1.0.0:
+[INFO] 
+[INFO] CampusReserve ...................................... SUCCESS [  0.001 s]
+[INFO] CampusReserve core domain .......................... SUCCESS [  1.995 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.064 s
+[INFO] Finished at: 2026-10-23T11:18:26-04:00
+[INFO] ------------------------------------------------------------------------

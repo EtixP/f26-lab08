@@ -1,0 +1,66 @@
+package edu.cmu.cs214.campusreserve.core.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import edu.cmu.cs214.campusreserve.core.domain.CancellationResult;
+import edu.cmu.cs214.campusreserve.core.domain.ModificationResult;
+import edu.cmu.cs214.campusreserve.core.support.Fixtures;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+/**
+ * Settles refuter finding 1 ("lengthening promotes a stranded waiter"). Temporary:
+ * the supervisor runs it, keeps the log, and deletes it.
+ */
+class SettleFinding1Test extends BookingServiceTestBase {
+
+    /** The refuter's public-API path to a waiter left on r-1 with their slot free. */
+    private void strandU2OnR1At14() {
+        String other = bookAndGetId("r-1", "u-3", Fixtures.interval("14:00", "15:00"));
+        assertTrue(book("r-1", "u-2", Fixtures.interval("14:00", "15:00")).isWaitlisted());
+        String r2 = bookAndGetId("r-2", "u-2", Fixtures.interval("14:00", "15:00"));
+        assertTrue(service.cancelBooking(other, "u-3").promotions().isEmpty());
+        service.cancelBooking(r2, "u-2");
+        assertEquals(1, service.waitlistForUser("u-2").size());
+    }
+
+    /** Shipped code only: a cancellation freeing 10:00-11:00 promotes the 14:00-15:00 waiter too. */
+    @Test
+    void theShippedCancellationPassPromotesTheStrandedWaiterFromUnrelatedFreedTime() {
+        strandU2OnR1At14();
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+
+        CancellationResult cancelled = service.cancelBooking(id, "u-1");
+
+        assertEquals(List.of("u-2"),
+            cancelled.promotions().stream().map(p -> p.booking().userId()).toList());
+        assertEquals(Fixtures.interval("14:00", "15:00"), cancelled.promotions().get(0).booking().interval());
+    }
+
+    /** The modification pass promotes exactly the same waiter, so it is "the same" pass CR 4 asks for. */
+    @Test
+    void lengtheningPromotesExactlyWhatThatCancellationWould() {
+        strandU2OnR1At14();
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+
+        ModificationResult modified = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:30"), 4);
+
+        assertEquals(List.of("u-2"),
+            modified.promotions().stream().map(p -> p.booking().userId()).toList());
+        assertEquals(Fixtures.interval("14:00", "15:00"), modified.promotions().get(0).booking().interval());
+    }
+
+    /** Without a pre-existing stranded waiter, a lengthen promotes nobody: CR 4's stated outcome. */
+    @Test
+    void withNothingStrandedALengthenPromotesNobody() {
+        String id = bookAndGetId("r-1", "u-1", Fixtures.interval("10:00", "11:00"));
+        bookAndGetId("r-1", "u-3", Fixtures.interval("14:00", "15:00"));
+        assertTrue(book("r-1", "u-2", Fixtures.interval("14:00", "15:00")).isWaitlisted());
+
+        ModificationResult modified = service.modifyBooking(id, "u-1", Fixtures.interval("10:00", "11:30"), 4);
+
+        assertTrue(modified.isModified());
+        assertTrue(modified.promotions().isEmpty());
+    }
+}
