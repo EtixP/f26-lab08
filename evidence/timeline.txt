@@ -5,3 +5,4 @@
 2026-10-23 11:15:08 EDT  Milestone 3 takeover point written (snapshot: evidence/PLAN-before-task-run.md); starting T1 run now
 2026-10-23 11:18:50 EDT  T1 gate green (core-domain 202 = 167+35); closing mvn -B clean test done
 2026-10-23 11:26:35 EDT  refuter (fresh subagent) reported 2 findings; finding 1 dismissed with evidence (evidence/m3-finding1-settle.log); probe files deleted; guardrail unlocked; final mvn -B clean test + pytest green
+2026-10-23 13:00:52 EDT  PLAN.md and MILESTONE.md reworded for reading aloud (wording only; original M1 wording in evidence/PLAN-after-milestone1.md and commit b5eb4ad)
